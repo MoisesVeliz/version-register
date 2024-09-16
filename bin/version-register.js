@@ -90,7 +90,7 @@ const getDirectories = (source) => {
   try {
     return fs
       .readdirSync(source, { withFileTypes: true })
-      .filter((dirent) => dirent.isDirectory())
+      .filter((dirent) => dirent.isDirectory() && dirent.name !== "version-register") // Ignorar la carpeta 'version-register'
       .map((dirent) => dirent.name);
   } catch (error) {
     console.error("Error al obtener directorios:", error);
