@@ -171,11 +171,11 @@ const analizarProyecto = (rutaProyecto, entorno) => {
 
 const analizarRecursivamente = (ruta, entorno) => {
   try {
-    analizarProyecto(ruta, entorno);
-
+    
     const subdirectorios = getDirectories(ruta);
     for (const subdir of subdirectorios) {
-      analizarRecursivamente(path.join(ruta, subdir), entorno);
+      analizarProyecto(path.join(ruta, subdir), entorno);
+      // analizarRecursivamente(path.join(ruta, subdir), entorno);
     }
   } catch (error) {
     console.error("Error al analizar recursivamente:", error);
