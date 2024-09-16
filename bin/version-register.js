@@ -10,11 +10,18 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Leer la versión del package.json
-const packageJson = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "package.json"), "utf8")
-);
-const version = packageJson.version;
+const obtenerVersion = () => {
+  try {
+    const packageJsonPath = path.join(__dirname, '..', 'package.json');
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    return packageJson.version;
+  } catch (error) {
+    console.error('Error al leer la versión del package.json:', error);
+    return 'desconocida';
+  }
+};
+
+const version = obtenerVersion();
 
 const argv = yargs(hideBin(process.argv))
   .option("path", {
