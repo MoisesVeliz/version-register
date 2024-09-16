@@ -4,7 +4,7 @@
   "description": "",
   "main": "bin/version-register.js",
   "repository": {
-    "url": ""
+    "url": "git+https://github.com/MoisesVeliz/version-register.git"
   },
   "bin": {
     "vrg": "bin/version-register.js"
