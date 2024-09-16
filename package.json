@@ -1,0 +1,22 @@
+{
+  "name": "version-register",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/version-register.js",
+  "repository": {
+    "url": ""
+  },
+  "bin": {
+    "vrg": "bin/version-register.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}
