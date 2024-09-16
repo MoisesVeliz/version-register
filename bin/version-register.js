@@ -39,14 +39,14 @@ const argv = yargs(hideBin(process.argv))
     type: "boolean",
     description: "Analizar subdirectorios de forma recursiva",
   })
-  .option("version", {
+  .option("vers", {
     alias: "v",
     type: "boolean",
     description: "Muestra la versión del paquete",
   }).argv;
 
 // Si se solicita la versión, mostrarla y salir
-if (argv.version) {
+if (argv.vers) {
   console.log(`version-register v${version}`);
   process.exit(0);
 }
@@ -130,7 +130,7 @@ const obtenerVersionDotNet = (csprojPath) => {
 
 const analizarProyecto = (rutaProyecto, entorno) => {
   try {
-    console.log(`Analizando proyecto en: ${rutaProyecto}`);
+    // console.log(`Analizando proyecto en: ${rutaProyecto}`);
     const packagePath = path.join(rutaProyecto, "package.json");
     const csprojFiles = fs
       .readdirSync(rutaProyecto)
@@ -145,14 +145,14 @@ const analizarProyecto = (rutaProyecto, entorno) => {
 
     if (fs.existsSync(packagePath)) {
       const { nombre, version } = obtenerVersionNode(packagePath);
-      console.log(`Proyecto Node.js: ${nombre}, Versión: ${version}`);
+      // console.log(`Proyecto Node.js: ${nombre}, Versión: ${version}`);
       const datos = `${fechaHoraRegistro},Node.js,${nombre},${version},${entorno}`;
       registrarEnCSV(archivoCSV, datos);
     } else if (csprojFiles.length > 0) {
       const { nombre, version } = obtenerVersionDotNet(
         path.join(rutaProyecto, csprojFiles[0])
       );
-      console.log(`Proyecto .NET: ${nombre}, Versión: ${version}`);
+      // console.log(`Proyecto .NET: ${nombre}, Versión: ${version}`);
       const datos = `${fechaHoraRegistro},.NET,${nombre},${version},${entorno}`;
       registrarEnCSV(archivoCSV, datos);
     } else {
@@ -190,9 +190,9 @@ const main = () => {
     const entorno = argv.env || "development";
     const esRecursivo = argv.recursive || false;
 
-    console.log(`Iniciando análisis en: ${ruta}`);
-    console.log(`Entorno: ${entorno}`);
-    console.log(`Modo recursivo: ${esRecursivo ? "Sí" : "No"}`);
+    // console.log(`Iniciando análisis en: ${ruta}`);
+    // console.log(`Entorno: ${entorno}`);
+    // console.log(`Modo recursivo: ${esRecursivo ? "Sí" : "No"}`);
 
     if (esRecursivo) {
       analizarRecursivamente(ruta, entorno);
@@ -200,7 +200,7 @@ const main = () => {
       analizarProyecto(ruta, entorno);
     }
 
-    console.log("Análisis completado.");
+    // console.log("Análisis completado.");
   } catch (error) {
     console.error("Error en la ejecución principal:", error);
   }
